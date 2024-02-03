@@ -17,12 +17,11 @@ const winPatterns = [
   [6, 7, 8],
 ];
 
-const resetGame = ()=>{
-    turn0=true;
-    enableBoxes();
-    msgContainer.classList.add("hide");
-
-}
+const resetGame = () => {
+  turn0 = true;
+  enableBoxes();
+  msgContainer.classList.add("hide");
+};
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
     if (turn0) {
@@ -39,11 +38,11 @@ boxes.forEach((box) => {
 });
 
 const enableBoxes = () => {
-    for (let box of boxes) {
-      box.disabled = false;
-      box.innerText="";
-    }
-  };
+  for (let box of boxes) {
+    box.disabled = false;
+    box.innerText = "";
+  }
+};
 
 const disableBoxes = () => {
   for (let box of boxes) {
@@ -57,35 +56,35 @@ const showWinner = (winner) => {
 };
 
 const checkWinner = () => {
-    let tie = true;
-  
-    for (let pattern of winPatterns) {
-      let pos1Val = boxes[pattern[0]].innerText;
-      let pos2Val = boxes[pattern[1]].innerText;
-      let pos3Val = boxes[pattern[2]].innerText;
-  
-      if (pos1Val !== "" && pos2Val !== "" && pos3Val !== "") {
-        if (pos1Val === pos2Val && pos2Val === pos3Val) {
-          console.log("winner", pos1Val);
-          showWinner(pos1Val);
-          tie = false;
-        }
-      } else {
-        tie = false; // At least one box is not filled
+  let tie = true;
+
+  for (let pattern of winPatterns) {
+    let pos1Val = boxes[pattern[0]].innerText;
+    let pos2Val = boxes[pattern[1]].innerText;
+    let pos3Val = boxes[pattern[2]].innerText;
+
+    if (pos1Val !== "" && pos2Val !== "" && pos3Val !== "") {
+      if (pos1Val === pos2Val && pos2Val === pos3Val) {
+        console.log("winner", pos1Val);
+        showWinner(pos1Val);
+        tie = false;
       }
-    }
-  
-    if (tie) {
-      console.log("It's a tie!");
-      showTie();
+    } else {
+      tie = false; // At least one box is not filled
     }
   }
-  
-  const showTie = () => {
-    msg.innerText = "It's a tie! Try again.";
-    msgContainer.classList.remove("hide");
-    disableBoxes();
-  };
-  
-  newGameBtn.addEventListener("click",resetGame)
-  resetBtn.addEventListener("click",resetGame)
+
+  if (tie) {
+    console.log("It's a tie!");
+    showTie();
+  }
+};
+
+const showTie = () => {
+  msg.innerText = "It's a tie! Try again.";
+  msgContainer.classList.remove("hide");
+  disableBoxes();
+};
+
+newGameBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
